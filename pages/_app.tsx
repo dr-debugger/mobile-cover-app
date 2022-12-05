@@ -7,6 +7,7 @@ import { THEME } from "../utils/constants";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../utils/createEmotionCache";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { AuthProvider } from "../context/authContext";
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -24,8 +25,10 @@ function App({ Component, ...rest }: MyAppProps) {
     <Provider store={store}>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
+          <AuthProvider>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </AuthProvider>
         </ThemeProvider>
       </CacheProvider>
     </Provider>
