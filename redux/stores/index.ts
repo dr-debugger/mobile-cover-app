@@ -1,10 +1,24 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import rootReducer from "../reducers";
+
+const reducer = (state: any, action: any) => {
+  if (action.type === HYDRATE) {
+    const nextState = {
+      ...state, // use previous state
+      ...action.payload, // apply delta from hydration
+    };
+    // if (state.count.count) nextState.count.count = state.count.count; // preserve count value on client side navigation
+    return nextState;
+  } else {
+    return rootReducer(state, action);
+  }
+};
+
 
 const makeStore = () =>
   configureStore({
-    reducer: rootReducer,
+    reducer,
     devTools: process.env.NODE_ENV === "development",
   });
 
