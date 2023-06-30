@@ -4,6 +4,8 @@ const axiosInstance: AxiosInstance = axios.create({
   // baseURL: process.env.BASE_URL,
   // timeout: 15000,
   headers: { "Content-Type": "application/json" },
+
+  // withCredentials: true // for sent cookie on request
 });
 
 // Add a request interceptor

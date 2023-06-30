@@ -8,6 +8,20 @@ export const authReducer = (
   action: USER_CONTEXT_ACTION
 ) => {
   switch (action.type) {
+    case "ON_INITIALIZING_STATE_CHANGE": {
+      return {
+        ...state,
+        initialized: action.payload,
+      };
+    }
+    case "ON_LOGOUT": {
+      return {
+        ...state,
+        userLoginStatus: false,
+        user: null,
+        userRole: "",
+      };
+    }
     default: {
       return {
         ...state,
